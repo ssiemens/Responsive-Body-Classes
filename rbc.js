@@ -14,52 +14,53 @@
 /* ============================================================================ */
 
 (function ($) {
-	function rbc() {
+    
+    function rbc() {
+        // probably need this eh? 
+        var rBody = $('body');
 
-		// probably need this eh? 
-		var rBody = $('body');
+        // get width properly for device or browser
+        var rWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
-		// get width properly for device or browser
-		var rWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+        // get touch information
+        function is_touch() {
+        	return 'ontouchstart' in window 
+            || 'onmsgesturechange' in window;
+        }
 
-		// get touch information
-		function is_touch() {
-			return 'ontouchstart' in window 
-		    || 'onmsgesturechange' in window;
-		}
+        // does this device have touch? 
+        var rTouch  = is_touch();
+        var rDevice = (rTouch === true) ? 'touch' : 'no-touch';
 
-		// does this device have touch? 
-		var rTouch  = is_touch();
-		var rDevice = (rTouch === true) ? 'touch' : 'no-touch';
+        // pick out class names based on width
+        var rPhase = (rWidth < 768) ? 'mobile' : (rWidth > 959) ? 'desktop' : 'tablet';
 
-		// pick out class names based on width
-		var rPhase = (rWidth < 768) ? 'mobile' : (rWidth > 959) ? 'desktop' : 'tablet';
+        // sets classes function
+        function rClass(rPhase, rDevice) {
+        	
+        	// we remove for resize case
+        	rBody.removeClass('desktop tablet mobile');
 
-		// sets classes function
-		function rClass(rPhase, rDevice) {
-			
-			// we remove for resize case
-			rBody.removeClass('desktop tablet mobile');
+        	// add classes to body tag
+        	rBody.addClass(rPhase);
+        	rBody.addClass(rDevice);
+        }
 
-			// add classes to body tag
-			rBody.addClass(rPhase);
-			rBody.addClass(rDevice);
-		}
+        rClass(rPhase, rDevice);
+    }
 
-		rClass(rPhase, rDevice);
-	}
+    rbc();
 
-	rbc();
+    // capture resize
+    var rTimer;
+    $(window).resize(function() {
+        clearTimeout(rTimer);
+        id = setTimeout(rResizing, 100);
+    });
 
-	// capture resize
-	var rTimer;
-	$(window).resize(function() {
-	    clearTimeout(rTimer);
-	    id = setTimeout(rResizing, 100);
-	});
+    // fire function after resize
+    function rResizing() {
+        rbc();
+    }
 
-	// fire function after resize
-	function rResizing() {
-		rbc();
-	}
 })(jQuery);
