@@ -16,7 +16,7 @@
 (function ($) {
 	function rbc() {
 
-		// probably need this eh?
+		// probably need this eh? 
 		var rBody = $('body');
 
 		// get width properly for device or browser
@@ -51,7 +51,7 @@
 
 	rbc();
 
-	// fire resize once
+	// capture resize
 	var rTimer;
 	$(window).resize(function() {
 	    clearTimeout(rTimer);
