@@ -6,9 +6,9 @@
 // RBC - Responsive Body Class Helpers
 
 // ClasseNames triggered
-// l-desktop - 960px and up
-// l-tablet - 959px - 768px
-// l-mobile - 767px and down
+// desktop - 960px and up
+// tablet - 959px - 768px
+// mobile - 767px and down
 // no-touch
 // touch
 /* ============================================================================ */
